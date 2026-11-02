@@ -512,7 +512,6 @@ Run the portable subset in a disposable rootless Podman guest:
 ```shell
 nix run .#build-artifacts
 nix run .#tmachine -- test fedora-podman-rootless binaries e2e-podman
-nix run .#tmachine -- test fedora-podman-rootless binaries driver-podman
 ```
 
 Print the exact tmachine archive selection as a shell `PODMAN_CI_TESTS` array:
@@ -523,14 +522,23 @@ nix run .#generate-podman-e2e-ci-tests
 
 The `e2e-podman` testsuite runs a nextest archive built with the corresponding
 Rust feature and preloads its Python workload image into the rootless Podman
-store. The separate `driver-podman` testsuite compares OpenShell and direct
-Podman user-namespace mappings for the default, `auto`, `keep-id`, and private
-profiles. The E2E archive excludes binaries that still depend on wrapper-owned
+store. The E2E archive excludes binaries that still depend on wrapper-owned
 gateway controls, SPIFFE fixtures, the caller driver-config setting, or other
-guest setup. The `driver-podman` suite replaces the removed `podman_userns` E2E
-binary. `tests/tmachine/artifacts.nix` keeps the follow-up exclusions explicit and uses
+guest setup. `tests/tmachine/artifacts.nix` keeps the follow-up exclusions explicit and uses
 the same filter for the generated inventory, so excluded binaries cannot appear
 as false passes or silently re-enter the archive.
+
+The Podman driver suite (`tests/suites/drivers/podman`, package
+`podman-driver`) compares OpenShell and direct Podman user-namespace mappings.
+Each `fedora-podman-{rootful,rootless}-userns-<mode>` environment configures
+the gateway with one mode (`default`, `auto`, `keep-id` or `private`); only the
+`binaries` installer applies it:
+
+```shell
+nix run .#openshell-test-runner -- \
+  --environment fedora-podman-rootless-userns-keep-id --installer binaries \
+  --gateway tmachine --family drivers --package podman-driver
+```
 
 The `oci-image` feature suite (`tests/suites/features/oci-image`) checks OCI
 image identity and working-directory behavior shared by the Docker and Podman

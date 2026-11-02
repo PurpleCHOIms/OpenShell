@@ -1,15 +1,18 @@
 # SPDX-FileCopyrightText: Copyright (c) 2025-2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
+# The package isn't named `podman` because the support crate it depends on is.
 [package]
-name = "openshell-test-suite-podman"
+name = "podman-driver"
+description = "Drivers suite: Podman driver behavior, such as user namespaces"
 version = "0.0.0"
 edition = "2024"
 rust-version = "1.94"
 license = "Apache-2.0"
 repository = "https://github.com/NVIDIA/OpenShell"
+publish = false
 
 [dependencies]
-openshell-conformance = { path = "../../../../crates/openshell-conformance" }
-serde = { version = "1", features = ["derive"] }
-tokio = { version = "1.43", features = ["macros", "rt"] }
+container-engine = { path = "../../../support/container-engine" }
+openshell-testkit = { path = "../../../testkit/testkit" }
+podman = { path = "../../../support/podman" }

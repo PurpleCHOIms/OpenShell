@@ -6,9 +6,9 @@
 # `podman_userns_mode` is default, auto, keep-id or private. Every mode except
 # default writes its `[openshell.drivers.podman]` settings to
 # `podman_userns_driver_config`, which the openshell_gateway role (the
-# `binaries` installer) appends to gateway.toml. The Podman support crate
-# (tests/support/podman) reads the published mode and runs Podman's own
-# reference container in it.
+# `binaries` installer) appends to gateway.toml; default removes the file. The
+# Podman support crate (tests/support/podman) reads the published mode and
+# runs Podman's own reference container in it.
 ---
 - name: Podman user namespaces for tests
   hosts: all
@@ -57,6 +57,15 @@
         group: root
         mode: "0644"
       when: podman_userns_mode != "default"
+
+    # The fragment is the only source of userns, uidmap and gidmap settings in
+    # the rendered gateway.toml, so default mode leaves them unset.
+    - name: Remove Podman driver user-namespace settings for default mode
+      become: true
+      ansible.builtin.file:
+        path: "{{ podman_userns_driver_config }}"
+        state: absent
+      when: podman_userns_mode == "default"
 
     - name: Publish Podman user-namespace test variables
       ansible.builtin.include_tasks: ../../test-env.yaml

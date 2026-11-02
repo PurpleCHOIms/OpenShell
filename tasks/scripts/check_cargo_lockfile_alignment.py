@@ -39,6 +39,7 @@ ALIGNED_WORKSPACES = (
     "tests/testkit",
     "tests/suites/conformance",
     "tests/suites/features",
+    "tests/openshell-test",
 )
 
 

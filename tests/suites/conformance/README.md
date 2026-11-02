@@ -3,7 +3,8 @@
 The `conformance` crate holds the testkit suites for sandbox behavior that every
 compute driver must provide. The family is this one crate, its own workspace.
 It is a library: each module in `src/` is one suite, and `cargo test` and
-nextest run the tests as the library's unit tests.
+nextest run the tests as the library's unit tests. `tests/openshell-test/`
+links it into the `openshell-test` program.
 
 | Suite | Covers |
 |---|---|
@@ -31,7 +32,8 @@ gateway and in a tmachine VM, as CI does.
 
 Add a `#[testkit::test]` function to a suite, or for a new area, a new file in
 `src/` and a `mod` line for it in `src/lib.rs`. No playbook, test archive or
-workflow entry is needed: the runner builds and runs every test in the crate.
+workflow entry is needed: the runner builds and runs every test in the
+crate, and `openshell-test` includes it.
 
 ## What a test may assert
 

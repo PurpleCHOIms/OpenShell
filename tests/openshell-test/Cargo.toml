@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[package]
+name = "openshell-test"
+description = "OpenShell's end-to-end tests as one program to run against a gateway"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.94"
+license = "Apache-2.0"
+repository = "https://github.com/NVIDIA/OpenShell"
+publish = false
+
+[[bin]]
+name = "openshell-test"
+path = "src/main.rs"
+
+[dependencies]
+openshell-testkit = { path = "../testkit/testkit" }
+# Suite crates. Each must also be named in `src/main.rs`.
+conformance = { path = "../suites/conformance" }
+
+# Its own workspace: it links suites from several family workspaces.
+[workspace]

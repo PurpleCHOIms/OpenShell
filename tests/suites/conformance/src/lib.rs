@@ -5,7 +5,7 @@
 //! provide. Each module is one suite.
 //!
 //! `cargo test` and nextest run the tests as this library's unit tests.
-//! `#[testkit::test]` also registers them, so a test program runs them by
+//! `#[testkit::test]` also registers them, so `openshell-test` runs them by
 //! linking this crate.
 
 mod cli;

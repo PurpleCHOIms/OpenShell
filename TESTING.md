@@ -17,6 +17,7 @@ python/openshell/      # Python unit tests (*_test.py suffix)
 e2e/python/            # Python E2E tests (test_*.py prefix)
 e2e/rust/              # Rust CLI E2E tests
 tests/testkit/         # Support library for SDK-driven E2E suites
+tests/openshell-test/  # openshell-test: the conformance suite as one program
 tests/suites/          # E2E suites, grouped by test family
 tests/tmachine/        # QEMU test machines, Ansible playbooks, and the Session API
 tests/runner/          # openshell-test-runner: runs a test family in a tmachine environment
@@ -180,6 +181,11 @@ gateway the same way the CLI does, through `OPENSHELL_GATEWAY_ENDPOINT`,
 by `OPENSHELL_BIN`. See
 [tests/testkit/README.md](tests/testkit/README.md) for how to write and run
 tests.
+
+`tests/openshell-test/` builds `openshell-test`, a program that links the
+conformance suite and runs it against a gateway without cargo or nextest
+(`openshell-test list`, `ready`, `run`). The testkit README describes its
+commands.
 
 Suites live under `tests/suites/<family>/`. Each family is a Cargo workspace
 with its own lockfile. Run the `conformance` suites against a local Docker

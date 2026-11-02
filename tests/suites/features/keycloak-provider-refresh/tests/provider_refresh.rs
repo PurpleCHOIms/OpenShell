@@ -4,9 +4,7 @@
 //! Provider OAuth refresh against Keycloak.
 //!
 //! Keycloak is only the provider's token issuer here; the CLI still reaches
-//! the gateway the usual way. Ported from
-//! `tests/suites/features/provider-refresh/keycloak`, which tmachine's
-//! `provider-refresh` testsuite runs until the required lanes switch.
+//! the gateway the usual way.
 
 use std::io::Write as _;
 

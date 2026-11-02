@@ -35,6 +35,7 @@ async fn configured_userns_matches_podman_reference(cx: &mut Context) -> testkit
     let userns = Userns::from_env()?;
     let engine = Engine::from_env()?;
     let image = testkit::base_image();
+    let reference = reference_uid_map(&engine, userns, &image).await?;
 
     let name = cx.name("pu");
     cx.track(&name);
@@ -66,9 +67,6 @@ async fn configured_userns_matches_podman_reference(cx: &mut Context) -> testkit
             run.stdout
         ))
     })?;
-
-    // The sandbox create pulled the image, so the reference doesn't need to.
-    let reference = reference_uid_map(&engine, userns, &image).await?;
     testkit::ensure!(
         sandbox == reference,
         "the sandbox UID map differs from Podman's {userns:?} reference:\nexpected:\n{reference}\nactual:\n{sandbox}"

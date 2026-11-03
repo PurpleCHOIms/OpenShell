@@ -39,10 +39,9 @@ run = [
   "cargo clippy --manifest-path tests/testkit/Cargo.toml --all-targets -- -D warnings",
   "cargo clippy --manifest-path tests/tmachine/Cargo.toml --all-targets -- -D warnings",
   "cargo clippy --manifest-path tests/runner/Cargo.toml --all-targets -- -D warnings",
-  "cargo clippy --manifest-path tests/suites/conformance/Cargo.toml -p conformance --all-targets -- -D warnings",
-  "cargo clippy --manifest-path tests/suites/drivers/Cargo.toml -p podman-driver --all-targets -- -D warnings",
-  "cargo clippy --manifest-path tests/suites/features/Cargo.toml -p keycloak-provider-refresh --all-targets -- -D warnings",
-  "cargo clippy --manifest-path tests/suites/features/Cargo.toml -p oci-image --all-targets -- -D warnings",
+  "cargo clippy --manifest-path tests/suites/conformance/Cargo.toml --workspace --all-targets -- -D warnings",
+  "cargo clippy --manifest-path tests/suites/drivers/Cargo.toml --workspace --all-targets -- -D warnings",
+  "cargo clippy --manifest-path tests/suites/features/Cargo.toml --workspace --all-targets -- -D warnings",
   "cargo clippy --manifest-path tests/support/Cargo.toml --all-targets -- -D warnings",
 ]
 run_windows = "powershell -NoProfile -ExecutionPolicy Bypass -File tasks/scripts/windows-msvc.ps1 lint native"
@@ -59,10 +58,9 @@ run = [
   "cargo fmt --manifest-path tests/testkit/Cargo.toml --all",
   "cargo fmt --manifest-path tests/tmachine/Cargo.toml --all",
   "cargo fmt --manifest-path tests/runner/Cargo.toml --all",
-  "cargo fmt --manifest-path tests/suites/conformance/Cargo.toml -p conformance",
-  "cargo fmt --manifest-path tests/suites/drivers/Cargo.toml -p podman-driver",
-  "cargo fmt --manifest-path tests/suites/features/Cargo.toml -p keycloak-provider-refresh",
-  "cargo fmt --manifest-path tests/suites/features/Cargo.toml -p oci-image",
+  "cargo fmt --manifest-path tests/suites/conformance/Cargo.toml --all",
+  "cargo fmt --manifest-path tests/suites/drivers/Cargo.toml --all",
+  "cargo fmt --manifest-path tests/suites/features/Cargo.toml --all",
   "cargo fmt --manifest-path tests/support/Cargo.toml --all",
 ]
 hide = true
@@ -78,10 +76,9 @@ run = [
   "cargo fmt --manifest-path tests/testkit/Cargo.toml --all -- --check",
   "cargo fmt --manifest-path tests/tmachine/Cargo.toml --all -- --check",
   "cargo fmt --manifest-path tests/runner/Cargo.toml --all -- --check",
-  "cargo fmt --manifest-path tests/suites/conformance/Cargo.toml -p conformance -- --check",
-  "cargo fmt --manifest-path tests/suites/drivers/Cargo.toml -p podman-driver -- --check",
-  "cargo fmt --manifest-path tests/suites/features/Cargo.toml -p keycloak-provider-refresh -- --check",
-  "cargo fmt --manifest-path tests/suites/features/Cargo.toml -p oci-image -- --check",
+  "cargo fmt --manifest-path tests/suites/conformance/Cargo.toml --all -- --check",
+  "cargo fmt --manifest-path tests/suites/drivers/Cargo.toml --all -- --check",
+  "cargo fmt --manifest-path tests/suites/features/Cargo.toml --all -- --check",
   "cargo fmt --manifest-path tests/support/Cargo.toml --all -- --check",
 ]
 hide = true

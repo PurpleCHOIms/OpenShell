@@ -262,11 +262,9 @@ suite, with a name that says what the suite tests.
 2. Write the tests in `tests/*.rs` as `#[testkit::test]` functions.
 3. Re-lock the workspace: `cargo metadata --manifest-path
    tests/suites/features/Cargo.toml`, then
-   `uv run tasks/scripts/check_cargo_lockfile_alignment.py --fix`.
-4. Add `cargo fmt` and `cargo clippy` lines for the package (`-p <name>`) to
-   `tasks/rust.toml` and to the Format and Lint steps in
-   `.github/workflows/branch-checks.yml`.
-5. Add a row for the suite to the matrix in `.github/workflows/e2e-suites.yml`.
+   `uv run tasks/scripts/check_cargo_lockfile_alignment.py --fix`. `cargo fmt`
+   and `cargo clippy` already cover every package in the workspace.
+4. Add a row for the suite to the matrix in `.github/workflows/e2e-suites.yml`.
 
 If the feature only needs the gateway, run the suite in an existing
 environment such as `ubuntu-docker-rootful`, and skip the rest of this
